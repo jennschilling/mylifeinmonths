@@ -261,7 +261,7 @@ life_in_months_final <- life_in_months_role_annotations +
   geom_segment(aes(x = 24, xend = 24, y = 12.75, yend = 13.25), 
                color = location_color) +
   location_text(x = 28.5, y = location_annotations_y + 0.1, 
-                label = "tucson") +
+                label = "arizona") +
   geom_segment(aes(x = 25, xend = 27.25, y = 13, yend = 13), 
                color = location_color) +
   geom_segment(aes(x = 29.75, xend = 32, y = 13, yend = 13), 
