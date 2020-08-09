@@ -25,7 +25,8 @@ current_month <- month(today())
 life_data <- expand_grid(month = 1:12, 
                          year = birth_year:current_year) %>%
   arrange(year, month) %>%
- # filter(!(year == birth_year & month < birth_month)) %>%
+  # uncomment to start with month 1 = birth month
+  # filter(!(year == birth_year & month < birth_month)) %>%
   filter(!(year == current_year & month > current_month))
 
 # eras to be labeled and colored in the chart
@@ -118,10 +119,18 @@ initial_segment <- function(x, xend, y, yend,
 
 
 life_in_months_initial_annotations <- life_in_months_base +
-  initial_text(x = 0, y = 6.5, label = "1 year", angle = 90) +
-  initial_segment(x = 0, xend = 0, y = 1, yend = 5) +
+  initial_text(x = 0, y = 6.5, 
+               # switch for start with month 1 vs. start with Jan of birth year
+               label = "1 calendar year", #"1 year", 
+               angle = 90) +
+  initial_segment(x = 0, xend = 0, y = 1, 
+                  # switch for start with month 1 vs. start with Jan of birth year
+                  yend = 3.5) + #yend = 5) +
   initial_segment(x = -0.25, xend = 0.25, y = 1, yend = 1) +
-  initial_segment(x = 0, xend = 0, y = 8, yend = 12) +
+  initial_segment(x = 0, xend = 0, 
+                  # switch for start with month 1 vs. start with Jan of birth year
+                  y = 9.5,  #y = 8, 
+                  yend = 12) +
   initial_segment(x = -0.25, xend = 0.25, y = 12, yend = 12) +
   initial_text(x = 1, y = 14.5, 
                label = "1 square = 1 month", 
@@ -137,7 +146,9 @@ life_in_months_initial_annotations <- life_in_months_base +
   geom_segment(aes(x = 2, xend = 4, y = 0, yend = 0), 
                arrow = arrow(length = unit(0.0175, "npc")), 
                colour = initial_annotations_colour) +
-  annotate("text", x = 33, y = 6.5, label = "my life\nin months", 
+  annotate("text", x = 33, y = 6.5, 
+           # switch for start with month 1 vs. start with Jan of birth year
+           label = "months of\nmy life", #"my life\nin months", 
            hjust = 0, family = "Verdana", 
            fontface = "bold", 
            lineheight = 1, 
@@ -262,9 +273,9 @@ life_in_months_final <- life_in_months_role_annotations +
                color = location_color) +
   location_text(x = 28.5, y = location_annotations_y + 0.1, 
                 label = "arizona") +
-  geom_segment(aes(x = 25, xend = 27.25, y = 13, yend = 13), 
+  geom_segment(aes(x = 25, xend = 27, y = 13, yend = 13), 
                color = location_color) +
-  geom_segment(aes(x = 29.75, xend = 32, y = 13, yend = 13), 
+  geom_segment(aes(x = 30, xend = 32, y = 13, yend = 13), 
                color = location_color) +
   geom_segment(aes(x = 25, xend = 25, y = 12.75, yend = 13.25), 
                color = location_color) +
@@ -276,10 +287,18 @@ life_in_months_final
 
 #### Save final plot ####
 
-ggsave("life_in_months.png",
-       plot = life_in_months_final, 
-       device = "png", 
-       type = "cairo", 
-       width = 25, 
-       height = 15, 
+# ggsave("life_in_months.png",
+#        plot = life_in_months_final, 
+#        device = "png", 
+#        type = "cairo", 
+#        width = 25, 
+#        height = 15, 
+#        dpi = 300)
+
+ggsave("life_in_months_july_start.png",
+       plot = life_in_months_final,
+       device = "png",
+       type = "cairo",
+       width = 25,
+       height = 15,
        dpi = 300)
