@@ -26,8 +26,8 @@ life_data <- expand_grid(month = 1:12,
                          year = birth_year:current_year) %>%
   arrange(year, month) %>%
   # uncomment to start with month 1 = birth month
-  # filter(!(year == birth_year & month < birth_month)) %>%
-  filter(!(year == current_year & month > current_month))
+  filter(!(year == birth_year & month < birth_month))
+  #filter(!(year == current_year & month > current_month))
 
 # eras to be labeled and colored in the chart
 # year_month is the start of the era
@@ -44,7 +44,7 @@ eras <- tribble(
   "2015,7", "statistician", "#648ADE",
   "2016,11", "americorps + teacher training", "#337CA3",
   "2017,8", "middle school teacher", "#128CE3",
-  "2020,1", "data analyst", "#5889C4"
+  "2020,1", "senior data analyst", "#5889C4"
 )
 
 # join eras and life data together
@@ -139,14 +139,14 @@ life_in_months_initial_annotations <- life_in_months_base +
                hjust = 0.4) +
   geom_curve(aes(x = 0, xend = 1, y = 14, yend = 12), 
              arrow = arrow(length = unit(0.0175, "npc")), 
-             colour = initial_annotations_colour) +
+             color = initial_annotations_color) +
   initial_text(x = 0.5, y = 0, label = "age", 
                size = annotation_base_size * 1, 
                hjust = 0) +
   geom_segment(aes(x = 2, xend = 4, y = 0, yend = 0), 
                arrow = arrow(length = unit(0.0175, "npc")), 
-               colour = initial_annotations_colour) +
-  annotate("text", x = 33, y = 6.5, 
+               color = initial_annotations_color) +
+  annotate("text", x = 34, y = 6.5, 
            # switch for start with month 1 vs. start with Jan of birth year
            label = "months of\nmy life", #"my life\nin months", 
            hjust = 0, family = "Verdana", 
@@ -230,9 +230,9 @@ life_in_months_role_annotations <- life_in_months_initial_annotations +
              curvature = -0.2,
              arrow = arrow(length = unit(0.0175, "npc")), 
              color = unique(life_data_list[["middle school teacher"]][["text_color"]])) +
-  role_text(x = 35, 
+  role_text(x = 38, 
             y = 1, 
-            label = "data analyst", 
+            label = "senior data analyst", 
             lineheight = annotation_lineheight - 0.25) +
   geom_curve(aes(x = 34.75, xend = 32.5, y = 0.5, yend = 0.35), 
              curvature = -0.3, 
@@ -275,11 +275,11 @@ life_in_months_final <- life_in_months_role_annotations +
                 label = "arizona") +
   geom_segment(aes(x = 25, xend = 27, y = 13, yend = 13), 
                color = location_color) +
-  geom_segment(aes(x = 30, xend = 32, y = 13, yend = 13), 
+  geom_segment(aes(x = 30, xend = 33, y = 13, yend = 13), 
                color = location_color) +
   geom_segment(aes(x = 25, xend = 25, y = 12.75, yend = 13.25), 
                color = location_color) +
-  geom_segment(aes(x = 32, xend = 32, y = 12.75, yend = 13.25), 
+  geom_segment(aes(x = 33, xend = 33, y = 12.75, yend = 13.25), 
                color = location_color) 
 
 life_in_months_final
@@ -287,18 +287,18 @@ life_in_months_final
 
 #### Save final plot ####
 
-# ggsave("life_in_months.png",
-#        plot = life_in_months_final, 
-#        device = "png", 
-#        type = "cairo", 
-#        width = 25, 
-#        height = 15, 
-#        dpi = 300)
-
-ggsave("life_in_months_july_start.png",
+ggsave("life_in_months_updated.png",
        plot = life_in_months_final,
        device = "png",
        type = "cairo",
        width = 25,
        height = 15,
        dpi = 300)
+
+# ggsave("life_in_months_july_start.png",
+#        plot = life_in_months_final,
+#        device = "png",
+#        type = "cairo",
+#        width = 25,
+#        height = 15,
+#        dpi = 300)
