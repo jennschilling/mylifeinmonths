@@ -148,7 +148,7 @@ life_in_months_initial_annotations <- life_in_months_base +
                color = initial_annotations_color) +
   annotate("text", x = 34, y = 6.5, 
            # switch for start with month 1 vs. start with Jan of birth year
-           label = "months of\nmy life", #"my life\nin months", 
+           label = "my life\nin months", #"months of\nmy life", 
            hjust = 0, family = "Verdana", 
            fontface = "bold", 
            lineheight = 1, 
