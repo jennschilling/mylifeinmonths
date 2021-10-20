@@ -237,7 +237,7 @@ life_in_months_role_annotations <- life_in_months_initial_annotations +
   geom_curve(aes(x = 34.75, xend = 32.5, y = 0.5, yend = 0.35), 
              curvature = -0.3, 
              arrow = arrow(length = unit(0.0175, "npc")), 
-             color = unique(life_data_list[["data analyst"]][["text_color"]]))
+             color = unique(life_data_list[["senior data analyst"]][["text_color"]]))
 
 #### Location annotations ####
 
